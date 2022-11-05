@@ -6,7 +6,7 @@ Tested with Windows Powershell 5 and Powershell 7
 ---
 ## Installation (Windows)
 
-You need a [OpenAI account](https://beta.openai.com/) and an API which you can generate from ["View API Keys"](https://beta.openai.com/account/api-keys)
+You need a [OpenAI account](https://beta.openai.com/) and an API key which you can generate from ["View API Keys"](https://beta.openai.com/account/api-keys)
 
 Before running you need to first create the ApiKey file by running the below in the same directory as *GenerateImage.ps1*
 
