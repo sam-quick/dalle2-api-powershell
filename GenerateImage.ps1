@@ -23,9 +23,6 @@ Begin {
     $url = "https://api.openai.com/v1/images/generations"
 }
 Process {
-	$ApiKeySecure = Get-Content $APIKeyPath
-	$ApiKey = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR((ConvertTo-SecureString $ApiKeySecure)))
-	
 	$recordData = [ordered]@{
 		prompt = $Prompt
 		n = $NumberOfImages
@@ -44,15 +41,23 @@ Process {
 
 	$body = $record | ConvertTo-Json -Depth 5
 
+	$ApiKeySecure = Get-Content $APIKeyPath
+	
 	$headers =@{
-		"Authorization" = "Bearer $ApiKey"
+		"Authorization" = "Bearer $([Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR((ConvertTo-SecureString $ApiKeySecure))))"
 	}
+
+	Remove-Variable ApiKeySecure
 
 	try
 	{
 		Write-Verbose "POST $url"
 		$response = Invoke-RestMethod $url -Method POST -Body $body -Headers $headers -ContentType "application/json;charset=UTF-8"
-		$headers = $null
+		
+		Remove-Variable headers
+
+		[System.GC]::Collect()
+		
 		$success = $true
 		$timestamp = (Get-Date -f "yyyy-MM-dd HH:mm:ss:ffff")
 	}
