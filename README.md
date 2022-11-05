@@ -1,12 +1,18 @@
 # dalle2-api-powershell
 Powershell script to generate images using DALLE-2 by OpenAI
 
+Tested with Windows Powershell 5 and Powershell 7
+
 ---
-## Installation
+## Installation (Windows)
+
+You need a [OpenAI account](https://beta.openai.com/) and an API which you can generate from ["View API Keys"](https://beta.openai.com/account/api-keys)
 
 Before running you need to first create the ApiKey file by running the below in the same directory as *GenerateImage.ps1*
 
-`"<YOUR API KEY>" | ConvertTo-SecureString -AsPlainText -Force | ConvertFrom-SecureString | Out-File ApiKey`
+`"<YOUR API KEY>" | ConvertTo-SecureString -AsPlainText -Force | ConvertFrom-SecureString | Out-File ApiKey` 
+
+The API Key is encrypted using Windows Data Protection API. This means that only the same user account on the same computer will be able to use this API key and run the *GenerateImage.ps1* script
 
 ---
 ## Parameters
